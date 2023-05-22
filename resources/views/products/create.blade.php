@@ -41,7 +41,7 @@
     </div>
     <div class="form-group">
         <label for="image">Image:</label>
-        <input type="file" name="Image" class="form-control-file">
+        <input type="file" multiple name="Images[]" class="form-control-file">
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
     <a href="{{ route('products.index') }}" class="btn btn-secondary">Back</a>

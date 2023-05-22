@@ -11,7 +11,7 @@ class ProductController extends Controller
     
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(2);
         return view('products.index', compact('products'));
     }
 
@@ -26,19 +26,27 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'Name' => 'required',
             'Description' => 'required',
-            'Price' => 'required|numeric',
+            'Price' => 'required',
             'CategoryID' => 'required|exists:categories,CategoryID',
-            'Image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'Images' => 'array',
+            'Images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        if ($request->hasFile('Image')) {
-            $image = $request->file('Image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $validatedData['Image'] = $imageName;
-        }
+        $product = Product::create($validatedData);
 
-        Product::create($validatedData);
+        if ($request->hasFile('Images')) {
+            $imagePaths = [];
+
+            foreach ($request->file('Images') as $image) {
+                $extension = $image->getClientOriginalExtension();
+                $imageName = time() . '_' . uniqid() . '.' . $extension;
+                $image->storeAs('public/images', $imageName);
+                $imagePaths[] = $imageName;
+            }
+
+            $product->Images = json_encode($imagePaths);
+            $product->save();
+        }
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
@@ -63,25 +71,26 @@ class ProductController extends Controller
             'Description' => 'required',
             'Price' => 'required|numeric',
             'CategoryID' => 'required|exists:categories,CategoryID',
-            'Image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'Images' => 'array',
+            'Images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $product = Product::findOrFail($id);
 
-        if ($request->hasFile('Image')) {
-            $image = $request->file('Image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $validatedData['Image'] = $imageName;
+        if ($request->hasFile('Images')) {
+            $imagePaths = [];
 
-            // Delete old image if exists
-            if ($product->Image) {
-                $oldImagePath = public_path('images') . '/' . $product->Image;
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
-                }
+            foreach ($request->file('Images') as $image) {
+                $extension = $image->getClientOriginalExtension();
+                $imageName = time() . '_' . uniqid() . '.' . $extension;
+                $image->storeAs('public/images', $imageName);
+                $imagePaths[] = $imageName;
             }
+
+            $product->Images = $imagePaths;
+            $product->save();
         }
+
 
         $product->update($validatedData);
 

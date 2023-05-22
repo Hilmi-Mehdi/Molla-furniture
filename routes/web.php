@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,9 @@ Route::get('/', function () {
 });
 
 Route::resource('products', ProductController::class);
+
+Route::get('/index', function () {
+    return view('main.index', [MainController::class, 'index']);
+})->name('index');
+
+Route::get('/shop', [MainController::class, 'shop'])->name('shop');
