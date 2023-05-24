@@ -8,7 +8,6 @@
 
 @section('content')
 
-    
 <h1>Products</h1>
 
 <a href="{{ route('products.create') }}" class="btn btn-primary">Create Product</a>
@@ -51,12 +50,12 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('products.show', $product) }}" class="btn btn-info">Show</a>
-                    <a href="{{ route('products.edit', $product) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ route('products.show', $product) }}" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{{ route('products.edit', $product) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                     <form action="{{ route('products.destroy', $product) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?')"><i class="fa-solid fa-trash"></i></button>
                     </form>
                 </td>
             </tr>
