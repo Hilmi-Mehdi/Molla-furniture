@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +23,9 @@ Route::get('/', function () {
 });
 
 Route::resource('products', ProductController::class);
+Route::resource('category', CategoryController::class);
+Route::resource('clients', ClientController::class);
+Route::resource('orders', OrderController::class);
 
 Route::get('/index',[MainController::class, 'index'])->name('index');
 

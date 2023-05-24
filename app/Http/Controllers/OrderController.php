@@ -24,9 +24,9 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'order_date' => 'required|date',
-            'total_amount' => 'required|numeric',
+            'ClientID' => 'required|exists:clients,id',
+            'OrderDate' => 'required|date',
+            'TotalAmount' => 'required|numeric',
         ]);
 
         Order::create($validatedData);
@@ -49,9 +49,9 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'order_date' => 'required|date',
-            'total_amount' => 'required|numeric',
+            'ClientID' => 'required|exists:clients,id',
+            'OrderDate' => 'required|date',
+            'TotalAmount' => 'required|numeric',
         ]);
 
         $order = Order::findOrFail($id);
