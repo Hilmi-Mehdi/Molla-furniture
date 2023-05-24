@@ -1325,6 +1325,5 @@
     <script src="{!! asset('assets/js/main.js') !!}"></script>
 </body>
 
-
 <!-- molla/index-2.html  22 Nov 2019 09:55:42 GMT -->
 </html>

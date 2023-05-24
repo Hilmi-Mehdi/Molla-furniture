@@ -43,10 +43,10 @@
                     <ul class="menu sf-arrows">
                         
                         <li class="megamenu-container @if(Route::is('index')) {{ 'active' }} @endif">
-                            <a href="index.html" class="sf-with-ul">Home</a>
+                            <a href="{{ route('index')}}" class="sf-with-ul">Home</a>
                         </li>
                         <li class=" @if(Route::is('shop')) {{ 'active' }} @endif">
-                            <a href="category.html" class="sf-with-ul">Shop</a>
+                            <a href="{{ route('shop')}}" class="sf-with-ul">Shop</a>
                         </li>
                         <li class=" @if(Route::is('category')) {{ 'active' }} @endif">
                             <a href="product.html" class="sf-with-ul">Categories</a>
@@ -57,12 +57,9 @@
                                         <div class="menu-col">
                                             <div class="menu-title">Product Categories</div><!-- End .menu-title -->
                                             <ul>
-                                                <li><a href="product-centered.html">Sofas & Sleeper sofas</a></li>
-                                                <li><a href="product-gallery.html">Beds</a></li>
-                                                <li><a href="product-sticky.html">Storage</a></li>
-                                                <li><a href="product-sidebar.html">Decoration</a></li>
-                                                <li><a href="product-fullwidth.html">Outdoor Furniture</a></li>
-                                                <li><a href="product-masonry.html">Lighting</a></li>
+                                                @foreach ($categories as $category)
+                                                    <li><a href="product-centered.html">{{ $category->Name }}</a></li>
+                                                @endforeach
                                             </ul>
                                         </div><!-- End .menu-col -->
                                     </div><!-- End .col-md-6 -->
@@ -70,7 +67,7 @@
                                     <div class="col-md-6">
                                         <div class="banner banner-overlay">
                                             <a href="category.html">
-                                                <img src="assets/images/menu/banner-2.jpg" alt="Banner">
+                                                <img src="{{ asset('assets/images/menu/banner-2.jpg')}}" alt="Banner">
 
                                                 <div class="banner-content banner-content-bottom">
                                                     <div class="banner-title text-white">New Trends<br><span><strong>summer 2023</strong></span></div><!-- End .banner-title -->

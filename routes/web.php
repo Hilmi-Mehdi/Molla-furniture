@@ -21,8 +21,14 @@ Route::get('/', function () {
 
 Route::resource('products', ProductController::class);
 
-Route::get('/index', function () {
-    return view('main.index', [MainController::class, 'index']);
-})->name('index');
+Route::get('/index',[MainController::class, 'index'])->name('index');
 
 Route::get('/shop', [MainController::class, 'shop'])->name('shop');
+
+Route::get('/category/{id}', [MainController::class, 'category'])->name('category');
+
+Route::get('/ss', function () {
+    return view('main.product');
+});
+
+Route::get('/product/{id}', [MainController::class, 'show'])->name('product');

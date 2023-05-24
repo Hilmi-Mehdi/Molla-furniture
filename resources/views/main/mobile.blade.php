@@ -20,14 +20,11 @@
                 </li>
                 <li>
                     <a href="product.html" class="sf-with-ul">Categories</a>
-                        <ul>
-                            <li><a href="product-centered.html">Sofas & Sleeper sofas</a></li>
-                            <li><a href="product-gallery.html">Beds</a></li>
-                            <li><a href="product-sticky.html">Storage</a></li>
-                            <li><a href="product-sidebar.html">Decoration</a></li>
-                            <li><a href="product-fullwidth.html">Outdoor Furniture</a></li>
-                            <li><a href="product-masonry.html">Lighting</a></li>
-                        </ul>
+                    <ul>
+                        @foreach ($categories as $category)
+                            <li><a href="product-centered.html">{{ $category->Name }}</a></li>
+                        @endforeach
+                    </ul>
                 </li>
                 <li>
                     <a href="category.html">Special Offers</a>
