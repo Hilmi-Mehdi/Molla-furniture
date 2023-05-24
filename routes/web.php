@@ -33,8 +33,4 @@ Route::get('/shop', [MainController::class, 'shop'])->name('shop');
 
 Route::get('/category/{id}', [MainController::class, 'category'])->name('category');
 
-Route::get('/ss', function () {
-    return view('main.product');
-});
-
 Route::get('/product/{id}', [MainController::class, 'show'])->name('product');
