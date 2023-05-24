@@ -10,9 +10,13 @@
 <p><strong>Price:</strong> {{ $product->Price }}</p>
 <p><strong>Category:</strong> {{ $product->category->Name }}</p>
 
-@if ($product->Image)
+@if ($product->Images)
     <p><strong>Image:</strong></p>
-    <img src="{{ asset('images/' . $product->Image) }}" alt="{{ $product->Name }}" width="300">
+    @foreach( json_decode($product->Images) as $image)
+                                <li>
+                                    <img src="{{ asset('storage/images/' . $image) }}" alt="{{ $product->Name }}" width="100">
+                                </li>
+                            @endforeach
 @endif
 
 <a href="{{ route('products.index') }}" class="btn btn-secondary">Back</a>

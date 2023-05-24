@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -37,7 +39,13 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::findOrFail($id);
-        return view('orders.show', compact('order'));
+        $orderitems = OrderItem::all()->where('OrderID', $id);
+        $products = [];
+        foreach ($orderitems as $item) {
+            $product = Product::findOrFail($item->ProductID);
+            $products[] = $product;
+        }
+        return view('orders.show', compact('order', 'products'));
     }
 
     public function edit($id)

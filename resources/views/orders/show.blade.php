@@ -10,6 +10,26 @@
 <p><strong>OrderDate:</strong> {{ $order->OrderDate }}</p>
 <p><strong>TotalAmount:</strong> {{ $order->TotalAmount }}</p>
 
+<h2>Ordered Products</h2>
 
+@foreach ($products as $product)
+<div>
+<h5>{{ $product->Name }}</h5>
 
-<a href="{{ route('Orders.index') }}" class="btn btn-secondary">Back</a>
+<p><strong>Description:</strong> {{ $product->Description }}</p>
+<p><strong>Price:</strong> {{ $product->Price }}</p>
+<p><strong>Category:</strong> {{ $product->category->Name }}</p>
+
+@if ($product->Images)
+    <p><strong>Image:</strong></p>
+    <ul>
+    @foreach( json_decode($product->Images) as $image)
+                                <li>
+                                    <img src="{{ asset('storage/images/' . $image) }}" alt="{{ $product->Name }}" width="100">
+                                </li>
+                            @endforeach</ul>
+@endif
+</div>
+@endforeach
+
+<a href="{{ route('orders.index') }}" class="btn btn-secondary">Back</a>
