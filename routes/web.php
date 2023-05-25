@@ -23,13 +23,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-
-Route::get('/', function () {
-    echo('Dashboard');
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
 })->name('dashboard');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
@@ -60,7 +56,7 @@ Route::get('/product/{id}', [MainController::class, 'show'])->name('product');
 
 Route::group(['namespace' => 'App\Http\Controllers'], function()
 {   
-    Route::get('/home', 'HomeController@index')->name('home.index');
+    Route::get('/', 'HomeController@index')->name('home.index');
 
     Route::group(['middleware' => ['guest']], function() {
 

@@ -1,9 +1,6 @@
 <!-- resources/views/products/create.blade.php -->
 @extends('admin.layout')
 
-@section('profile')
-    Aziz
-@endsection
 
 @section('content')
 <head>

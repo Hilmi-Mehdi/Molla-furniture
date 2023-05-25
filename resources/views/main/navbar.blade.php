@@ -21,7 +21,15 @@
                             <li><a href="tel:#"><i class="icon-phone"></i>Call: +212 631 417 887</a></li>
                             <li><a href="{{ route('about') }}">About Us</a></li>
                             <li><a href="{{ route('contact') }}">Contact Us</a></li>
-                            <li><a href=""><i class="icon-user"></i>Login</a></li>
+                            @if (auth()->check())
+                                @if (auth()->user()->type == 'admin')
+                                <script>window.location = "{{ route('logout.perform') }}";</script>
+                                <?php exit; ?>
+                                @endif
+                                {{ auth()->user()->name }}
+                            @else
+                                <li><a href="{{ route('login.show') }}">Login</a></li>
+                            @endif
                         </ul>
                     </li>
                 </ul><!-- End .top-menu -->
@@ -78,9 +86,9 @@
                                 </div><!-- End .row -->
                             </div><!-- End .megamenu megamenu-sm -->
                         </li>
-                        <li class=" @if(Route::is('special')) {{ 'active' }} @endif">
+                        {{-- <li class=" @if(Route::is('special')) {{ 'active' }} @endif">
                             <a href="#" class="sf-with-ul">Special Offers</a>
-                        </li>
+                        </li> --}}
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->
             </div><!-- End .header-left -->
