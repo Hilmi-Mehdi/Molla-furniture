@@ -5,7 +5,7 @@
                 <div class="col-sm-6 col-lg-3">
                     <div class="widget widget-about">
                         <img src="{!! asset('assets/images/logo-footer.png') !!}" class="footer-logo" alt="Footer Logo" width="105" height="25">
-                        <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
+                        <p>Premier furniture store dedicated to providing you with the finest furniture and exceptional customer service </p>
 
                         <div class="social-icons">
                             <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
@@ -22,11 +22,9 @@
                         <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="about.html">About Molla</a></li>
-                            <li><a href="#">How to shop on Molla</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="contact.html">Contact us</a></li>
-                            <li><a href="login.html">Log in</a></li>
+                            <li><a href="{{route('about')}}">About Molla</a></li>
+                            <li><a href="{{route('contact')}}">Contact us</a></li>
+                            <li><a href="">Log in</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -36,12 +34,10 @@
                         <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Money-back guarantee!</a></li>
-                            <li><a href="#">Returns</a></li>
-                            <li><a href="#">Shipping</a></li>
-                            <li><a href="#">Terms and conditions</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="{{route('faq')}}">Payment Methods</a></li>
+                            <li><a href="{{route('faq')}}">Returns</a></li>
+                            <li><a href="{{route('faq')}}">Shipping</a></li>
+                            <li><a href="{{route('faq')}}">Terms and conditions</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -53,7 +49,7 @@
                         <ul class="widget-list">
                             <li><a href="#">Sign In</a></li>
                             <li><a href="cart.html">View Cart</a></li>
-                            <li><a href="#">Help</a></li>
+                            <li><a href="{{route('faq')}}">Help</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->

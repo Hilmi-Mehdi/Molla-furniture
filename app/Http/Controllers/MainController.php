@@ -12,7 +12,7 @@ class MainController extends Controller
     {
         $products = Product::paginate(15);
         $categories = Category::all();
-        return view('main.index')->with('categories', $categories);
+        return view('main.index', compact('products', 'categories'));
     }
 
     public function shop()
@@ -22,11 +22,35 @@ class MainController extends Controller
         return view('main.shop', compact('products', 'categories'));
     }
 
+    public function about()
+    {
+        $products = Product::all();
+        $categories = Category::all();
+        return view('main.about', compact('products', 'categories'));
+    }
+    
+    public function contact()
+    {
+        $products = Product::all();
+        $categories = Category::all();
+        return view('main.contact', compact('products', 'categories'));
+    }
+
+    public function faq()
+    {
+        $products = Product::all();
+        $categories = Category::all();
+        return view('main.faq', compact('products', 'categories'));
+    }
+
     public function category($id)
     {
         $products = Product::all()->where('CategoryID', $id);
+        foreach ($products as $product) {
+            $categoryName = $product->category->Name;
+        }
         $categories = Category::all();
-        return view('main.category', compact('products', 'categories'));
+        return view('main.category', compact('products', 'categories', 'categoryName'));
     }
 
     public function show($id)

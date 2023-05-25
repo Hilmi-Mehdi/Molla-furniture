@@ -19,9 +19,9 @@
                         <a href="#">Links</a>
                         <ul>
                             <li><a href="tel:#"><i class="icon-phone"></i>Call: +212 631 417 887</a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
+                            <li><a href="{{ route('about') }}">About Us</a></li>
+                            <li><a href="{{ route('contact') }}">Contact Us</a></li>
+                            <li><a href=""><i class="icon-user"></i>Login</a></li>
                         </ul>
                     </li>
                 </ul><!-- End .top-menu -->
@@ -48,8 +48,8 @@
                         <li class=" @if(Route::is('shop')) {{ 'active' }} @endif">
                             <a href="{{ route('shop')}}" class="sf-with-ul">Shop</a>
                         </li>
-                        <li class=" @if(Route::is('category')) {{ 'active' }} @endif">
-                            <a href="product.html" class="sf-with-ul">Categories</a>
+                        <li class=" @if(Route::is('categories')) {{ 'active' }} @endif">
+                            <a href="" class="sf-with-ul">Categories</a>
 
                             <div class="megamenu megamenu-sm">
                                 <div class="row no-gutters">
@@ -58,7 +58,7 @@
                                             <div class="menu-title">Product Categories</div><!-- End .menu-title -->
                                             <ul>
                                                 @foreach ($categories as $category)
-                                                    <li><a href="product-centered.html">{{ $category->Name }}</a></li>
+                                                    <li><a href=" {{ route('categories', $category->CategoryID) }} ">{{ $category->Name }}</a></li>
                                                 @endforeach
                                             </ul>
                                         </div><!-- End .menu-col -->

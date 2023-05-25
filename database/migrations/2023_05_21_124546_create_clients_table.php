@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('ClientID');
             $table->string('Name');
             $table->string('Email');
-            $table->string('Address');
+            $table->string('Address')->nullable();
             $table->timestamps();
         });
     }
