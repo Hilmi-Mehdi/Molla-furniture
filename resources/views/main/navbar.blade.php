@@ -26,7 +26,7 @@
                                 <script>window.location = "{{ route('logout.perform') }}";</script>
                                 <?php exit; ?>
                                 @endif
-                                {{ auth()->user()->name }}
+                                <li>{{ auth()->user()->name }}</li>
                             @else
                                 <li><a href="{{ route('login.show') }}">Login</a></li>
                             @endif
@@ -107,41 +107,57 @@
                 <div class="dropdown cart-dropdown">
                     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class="icon-shopping-cart"></i>
-                        <span class="cart-count">2</span>
+                        @if (isset($cartProducts))
+                            <span class="cart-count">{{ count($cartProducts)}}</span>
+                        @endif
+                        
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="dropdown-cart-products">
+                            @if (isset($cartProducts))
+                            @foreach ($cartProducts as $product)
+                            <form action="{{ route('cart.remove', $product[0]->ProductID) }}" method="POST">
+                                @csrf
                             <div class="product">
                                 <div class="product-cart-details">
                                     <h4 class="product-title">
-                                        <a href="product.html">Blue utility pinafore denim dress</a>
+                                        <a href="product.html">{{ $product[0]->Name }}</a>
                                     </h4>
 
                                     <span class="cart-product-info">
-                                        <span class="cart-product-qty">1</span>
-                                        x $76.00
+                                        <span class="cart-product-qty">{{$product[1]}}</span>
+                                        x {{ $product[0]->Price }}
                                     </span>
                                 </div><!-- End .product-cart-details -->
 
                                 <figure class="product-image-container">
-                                    <a href="product.html" class="product-image">
-                                        <img src="{!! asset('assets/images/products/cart/product2.jpg') !!}" alt="product">
+                                    <a href="{{ route('product', $product[0]->ProductID) }}">
+                                        @if ($product[0]->Images)
+                                            <img src="{!! asset('storage/images/'. json_decode($product[0]->Images)[0]) !!}" alt="Product image">
+                                        @endif
                                     </a>
                                 </figure>
-                                <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                <button type="submit" class="btn-remove" title="Remove Product"><i class="icon-close"></i></button>
                             </div><!-- End .product -->
+                        </form>
+                            @endforeach
+
                         </div><!-- End .cart-product -->
 
-                        <div class="dropdown-cart-total">
+                        @if (isset($product))
+                            <div class="dropdown-cart-total">
                             <span>Total</span>
-                            <span class="cart-total-price">$160.00</span>
+                            <span class="cart-total-price">{{$product[0]->Price * $product[1]}}$</span>
                         </div><!-- End .dropdown-cart-total -->
+                        @endif
+                        
 
                         <div class="dropdown-cart-action">
-                            <a href="cart.html" class="btn btn-primary">View Cart</a>
+                            <a href="{{ route('cart.view') }}" class="btn btn-primary">View Cart</a>
                             <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
                         </div><!-- End .dropdown-cart-total -->
+                        @endif
                     </div><!-- End .dropdown-menu -->
                 </div><!-- End .cart-dropdown -->
             </div><!-- End .header-right -->

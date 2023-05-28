@@ -55,8 +55,7 @@
 			                				</button>
 
 			                				<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="signin-remember-2">
-												<label class="custom-control-label" for="signin-remember-2">Remember Me</label>
+                                                <a href="{{route('register.show')}}">Register</a>
 											</div><!-- End .custom-checkbox -->
 
 							    		</div><!-- End .form-footer -->

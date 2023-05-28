@@ -30,8 +30,10 @@
                 <div class="container">
                     <div class="row elements">
                         @foreach ($products as $product)
-                        <div class="product product-11 text-center">
-                            <figure class="product-media">
+                        <form action="{{route('cart.add', $product->ProductID)}}" method="POST">
+                            @csrf
+                            <div class="product product-11 text-center">
+                                <figure class="product-media">
                                 <span class="product-label label-new">NEW</span>
                                 <a href="{{ route('product', $product->ProductID) }}">
                                     @if ($product->Images)
@@ -51,9 +53,10 @@
                                 </div><!-- End .product-price -->
                             </div><!-- End .product-body -->
                             <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                <button class="btn-product btn-cart" type="submit"><span>add to cart</span></button>
                             </div><!-- End .product-action -->
                         </div><!-- End .product -->
+                    </form>
                         @endforeach
                         
                     </div>

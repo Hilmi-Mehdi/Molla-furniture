@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -24,23 +25,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->name('dashboard');
+
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
-    Route::resource('products', ProductController::class);
+    // if (auth()->check()) {
+    //     if (auth()->user()->type == 'admin') {
+            Route::get('/dashboard', function () {
+                return view('admin.dashboard');
+            })->name('dashboard');
 
-    Route::resource('category', CategoryController::class);
+            Route::resource('products', ProductController::class);
 
-    Route::resource('clients', ClientController::class);
+            Route::resource('category', CategoryController::class);
 
-    Route::resource('orders', OrderController::class);
+            Route::resource('clients', ClientController::class);
 
-});
+            Route::resource('orders', OrderController::class);
+        }
+    // }
+);
 
-Route::get('/index',[MainController::class, 'index'])->name('index');
+Route::get('/index', [MainController::class, 'index'])->name('index');
 
 Route::get('/shop', [MainController::class, 'shop'])->name('shop');
 
@@ -54,22 +60,26 @@ Route::get('/categories/{id}', [MainController::class, 'category'])->name('categ
 
 Route::get('/product/{id}', [MainController::class, 'show'])->name('product');
 
-Route::group(['namespace' => 'App\Http\Controllers'], function()
-{   
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/', 'HomeController@index')->name('home.index');
 
-    Route::group(['middleware' => ['guest']], function() {
+    Route::group(['middleware' => ['guest']], function () {
 
         Route::get('/register', 'RegisterController@show')->name('register.show');
         Route::post('/register', 'RegisterController@register')->name('register.perform');
 
         Route::get('/login', 'LoginController@show')->name('login.show');
         Route::post('/login', 'LoginController@login')->name('login.perform');
-
     });
 
-    Route::group(['middleware' => ['auth']], function() {
+    Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
     });
 });
+
+
+Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [MainController::class, 'cart'])->name('cart.view');
+Route::post('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');

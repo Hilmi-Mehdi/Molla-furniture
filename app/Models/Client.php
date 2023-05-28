@@ -13,7 +13,7 @@ class Client extends Authenticatable
     protected $table = 'clients';
     protected $primaryKey = 'ClientID';
 
-    protected $fillable = ['Name', 'Email', 'Address', 'password'];
+    protected $fillable = ['Name', 'Email', 'Address'];
 
     public function orders()
     {
