@@ -31,6 +31,8 @@
                 <div class="container">
                     <div class="row elements">
                         @foreach ($products as $product)
+                        <form action="{{route('cart.add', $product->ProductID)}}" method="POST">
+                            @csrf
                         <div class="product product-11 text-center">
                             <figure class="product-media">
                                 <span class="product-label label-new">NEW</span>
@@ -52,9 +54,10 @@
                                 </div><!-- End .product-price -->
                             </div><!-- End .product-body -->
                             <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
                             </div><!-- End .product-action -->
                         </div><!-- End .product -->
+                        </form>
                         @endforeach
                         
                     </div>

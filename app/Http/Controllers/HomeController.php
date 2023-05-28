@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +15,16 @@ class HomeController extends Controller
             return redirect('index');
         }
         if(auth()->user() && auth()->user()->type == 'admin'){
-            return redirect('dashboard');
+
+            $orders = Order::all();
+            $total = 0;
+            foreach ($orders as $order) {
+                $total += $order->TotalAmount;
+            }
+            $products = Product::all();
+            $clients = Client::all();
+
+            return view('admin.dashboard', compact('orders', 'products', 'clients', 'total'));
         }
         return redirect('index');
     }

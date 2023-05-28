@@ -222,6 +222,8 @@
                             }'>
                             @foreach ($products as $product)
                                 @if ($product->category->CategoryID == 5 || $product->category->CategoryID == 7)
+                                <form action="{{route('cart.add', $product->ProductID)}}" method="POST">
+                                    @csrf
                                 <div class="product product-11 text-center">
                                     <figure class="product-media">
                                         <a href="{{ route('product', $product->ProductID) }}">
@@ -238,10 +240,12 @@
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
                                     <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
                                     </div><!-- End .product-action -->
                                 </div><!-- End .product -->
+                            </form>
                                 @endif
+
                             @endforeach
                         </div><!-- End .owl-carousel -->
                     </div><!-- .End .tab-pane -->
@@ -274,6 +278,8 @@
                             }'>
                             @foreach ($products as $product)
                                 @if ($product->category->CategoryID == 7 )
+                                <form action="{{route('cart.add', $product->ProductID)}}" method="POST">
+                                    @csrf
                                 <div class="product product-11 text-center">
                                     <figure class="product-media">
                                         <a href="{{ route('product', $product->ProductID) }}">
@@ -290,9 +296,10 @@
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
                                     <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
                                     </div><!-- End .product-action -->
                                 </div><!-- End .product -->
+                            </form>
                                 @endif
                             @endforeach
 
@@ -327,6 +334,8 @@
                             }'>
                             @foreach ($products as $product)
                                 @if ($product->category->CategoryID == 5)
+                                <form action="{{route('cart.add', $product->ProductID)}}" method="POST">
+                                    @csrf
                                 <div class="product product-11 text-center">
                                     <figure class="product-media">
                                         <a href="{{ route('product', $product->ProductID) }}">
@@ -343,9 +352,10 @@
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
                                     <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
                                     </div><!-- End .product-action -->
                                 </div><!-- End .product -->
+                            </form>
                                 @endif
                             @endforeach
                         </div><!-- End .owl-carousel -->
@@ -438,8 +448,11 @@
                             <div class="row justify-content-center">
                             @foreach ($products as $product)
                                 @if ($product->category->CategoryID == 1 || $product->category->CategoryID == 2 || $product->category->CategoryID == 3)
+
                                 <div class="col-6 col-md-4 col-lg-3">
                                 <div class="product product-11 text-center">
+                                    <form action="{{route('cart.add', $product->ProductID)}}" method="POST">
+                                        @csrf
                                     <figure class="product-media">
                                         <a href="{{ route('product', $product->ProductID) }}">
                                             @if ($product->Images)
@@ -455,10 +468,13 @@
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
                                     <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
                                     </div><!-- End .product-action -->
+                                    </form>
                                 </div><!-- End .product -->
+                            
                                 </div>
+
                                 @endif
                             @endforeach
                             </div><!-- End .row -->
@@ -469,25 +485,28 @@
                             @foreach ($products as $product)
                                 @if ($product->category->CategoryID == 1)
                                 <div class="col-6 col-md-4 col-lg-3">
-                                <div class="product product-11 text-center">
-                                    <figure class="product-media">
-                                        <a href="{{ route('product', $product->ProductID) }}">
-                                            @if ($product->Images)
-                                                <img src="{!! asset('storage/images/'. json_decode($product->Images)[0]) !!}" alt="Product image" class="product-image">
-                                                <img src="{!! asset('storage/images/'. json_decode($product->Images)[1]) !!}" alt="Product image" class="product-image-hover">
-                                            @endif
-                                        </a>
-                                    </figure><!-- End .product-media -->
-                                    <div class="product-body">
-                                        <h3 class="product-title"><a href="product.html">{{ $product->Name }}</a></h3><!-- End .product-title -->
-                                        <div class="product-price">
-                                            {{ $product->Price }}$
-                                        </div><!-- End .product-price -->
-                                    </div><!-- End .product-body -->
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                    </div><!-- End .product-action -->
-                                </div><!-- End .product -->
+                                    <div class="product product-11 text-center">
+                                        <form action="{{route('cart.add', $product->ProductID)}}" method="POST">
+                                            @csrf
+                                        <figure class="product-media">
+                                            <a href="{{ route('product', $product->ProductID) }}">
+                                                @if ($product->Images)
+                                                    <img src="{!! asset('storage/images/'. json_decode($product->Images)[0]) !!}" alt="Product image" class="product-image">
+                                                    <img src="{!! asset('storage/images/'. json_decode($product->Images)[1]) !!}" alt="Product image" class="product-image-hover">
+                                                @endif
+                                            </a>
+                                        </figure><!-- End .product-media -->
+                                        <div class="product-body">
+                                            <h3 class="product-title"><a href="product.html">{{ $product->Name }}</a></h3><!-- End .product-title -->
+                                            <div class="product-price">
+                                                {{ $product->Price }}$
+                                            </div><!-- End .product-price -->
+                                        </div><!-- End .product-body -->
+                                        <div class="product-action">
+                                            <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
+                                        </div><!-- End .product-action -->
+                                        </form>
+                                    </div><!-- End .product -->
                                 </div>
                                 @endif
                             @endforeach
@@ -498,25 +517,28 @@
                             @foreach ($products as $product)
                                 @if ($product->category->CategoryID == 3)
                                 <div class="col-6 col-md-4 col-lg-3">
-                                <div class="product product-11 text-center">
-                                    <figure class="product-media">
-                                        <a href="{{ route('product', $product->ProductID) }}">
-                                            @if ($product->Images)
-                                                <img src="{!! asset('storage/images/'. json_decode($product->Images)[0]) !!}" alt="Product image" class="product-image">
-                                                <img src="{!! asset('storage/images/'. json_decode($product->Images)[1]) !!}" alt="Product image" class="product-image-hover">
-                                            @endif
-                                        </a>
-                                    </figure><!-- End .product-media -->
-                                    <div class="product-body">
-                                        <h3 class="product-title"><a href="product.html">{{ $product->Name }}</a></h3><!-- End .product-title -->
-                                        <div class="product-price">
-                                            {{ $product->Price }}$
-                                        </div><!-- End .product-price -->
-                                    </div><!-- End .product-body -->
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                    </div><!-- End .product-action -->
-                                </div><!-- End .product -->
+                                    <div class="product product-11 text-center">
+                                        <form action="{{route('cart.add', $product->ProductID)}}" method="POST">
+                                            @csrf
+                                        <figure class="product-media">
+                                            <a href="{{ route('product', $product->ProductID) }}">
+                                                @if ($product->Images)
+                                                    <img src="{!! asset('storage/images/'. json_decode($product->Images)[0]) !!}" alt="Product image" class="product-image">
+                                                    <img src="{!! asset('storage/images/'. json_decode($product->Images)[1]) !!}" alt="Product image" class="product-image-hover">
+                                                @endif
+                                            </a>
+                                        </figure><!-- End .product-media -->
+                                        <div class="product-body">
+                                            <h3 class="product-title"><a href="product.html">{{ $product->Name }}</a></h3><!-- End .product-title -->
+                                            <div class="product-price">
+                                                {{ $product->Price }}$
+                                            </div><!-- End .product-price -->
+                                        </div><!-- End .product-body -->
+                                        <div class="product-action">
+                                            <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
+                                        </div><!-- End .product-action -->
+                                        </form>
+                                    </div><!-- End .product -->
                                 </div>
                                 @endif
                             @endforeach
@@ -527,25 +549,28 @@
                             @foreach ($products as $product)
                                 @if ($product->category->CategoryID == 2)
                                 <div class="col-6 col-md-4 col-lg-3">
-                                <div class="product product-11 text-center">
-                                    <figure class="product-media">
-                                        <a href="{{ route('product', $product->ProductID) }}">
-                                            @if ($product->Images)
-                                                <img src="{!! asset('storage/images/'. json_decode($product->Images)[0]) !!}" alt="Product image" class="product-image">
-                                                <img src="{!! asset('storage/images/'. json_decode($product->Images)[1]) !!}" alt="Product image" class="product-image-hover">
-                                            @endif
-                                        </a>
-                                    </figure><!-- End .product-media -->
-                                    <div class="product-body">
-                                        <h3 class="product-title"><a href="product.html">{{ $product->Name }}</a></h3><!-- End .product-title -->
-                                        <div class="product-price">
-                                            {{ $product->Price }}$
-                                        </div><!-- End .product-price -->
-                                    </div><!-- End .product-body -->
-                                    <div class="product-action">
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                    </div><!-- End .product-action -->
-                                </div><!-- End .product -->
+                                    <div class="product product-11 text-center">
+                                        <form action="{{route('cart.add', $product->ProductID)}}" method="POST">
+                                            @csrf
+                                        <figure class="product-media">
+                                            <a href="{{ route('product', $product->ProductID) }}">
+                                                @if ($product->Images)
+                                                    <img src="{!! asset('storage/images/'. json_decode($product->Images)[0]) !!}" alt="Product image" class="product-image">
+                                                    <img src="{!! asset('storage/images/'. json_decode($product->Images)[1]) !!}" alt="Product image" class="product-image-hover">
+                                                @endif
+                                            </a>
+                                        </figure><!-- End .product-media -->
+                                        <div class="product-body">
+                                            <h3 class="product-title"><a href="product.html">{{ $product->Name }}</a></h3><!-- End .product-title -->
+                                            <div class="product-price">
+                                                {{ $product->Price }}$
+                                            </div><!-- End .product-price -->
+                                        </div><!-- End .product-body -->
+                                        <div class="product-action">
+                                            <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
+                                        </div><!-- End .product-action -->
+                                        </form>
+                                    </div><!-- End .product -->
                                 </div>
                                 @endif
                             @endforeach
